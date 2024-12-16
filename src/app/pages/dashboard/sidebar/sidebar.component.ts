@@ -1,30 +1,32 @@
-import { Component } from '@angular/core';
+
+import { Component, EventEmitter, Output } from '@angular/core';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  standalone: true,
-  imports: [CommonModule]
+  imports: [ NgScrollbarModule, CommonModule ]
 })
 export class SidebarComponent {
-  // Controle do estado dos menus
-  showSubMenuNavigate = false;
-  showSubMenu = false;
-  showSubMenuDocs = false;
+  @Output() sectionChange = new EventEmitter<string>();
 
-  toggleMenu(menu: string): void {
-    console.log(`Toggled menu: ${menu}`); // Verifica se o método é chamado
-    switch (menu) {
-      case 'navigate':
-        this.showSubMenuNavigate = !this.showSubMenuNavigate;
-        break;
-      case 'modules':
-        this.showSubMenu = !this.showSubMenu;
-        break;
-      case 'docs':
-        this.showSubMenuDocs = !this.showSubMenuDocs;
-        break;
-    }
-  }  
+  collapsedSections = {
+    dashboard: true,
+    modulos: true,
+    documentos: true,
+    configuracoes: false
+  };
+
+  activeSection: string = '';  
+  
+  toggleSection(section: keyof typeof this.collapsedSections) {
+    this.collapsedSections[section] = !this.collapsedSections[section];
+  }
+
+  navigateTo(section: string): void {
+    this.activeSection = section; // Atualizar seção ativa
+    this.sectionChange.emit(section); // Emitir evento para outras partes do sistema
+  }
 }
