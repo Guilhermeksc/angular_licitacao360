@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg" id="mainNav"
+  [class.hidden]="isHidden"
+  [class.scrolling-up]="isScrollingUp">
+  
+  <div class="container">
+    <button
+    class="navbar-toggler"
+    type="button"
+    aria-controls="navbarResponsive"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    (click)="toggleMenu()"
+  >
+    Menu
+    <i class="fas fa-bars ms-1"></i>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#inicio" (click)="closeMenu()">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sobre" (click)="closeMenu()">Sobre o projeto</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contatos" (click)="closeMenu()">Contatos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#login" (click)="closeMenu()">Login</a></li>
+      </ul>      
+    </div>    
+  </div>
+</nav>

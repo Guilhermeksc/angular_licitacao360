@@ -1,0 +1,64 @@
+.navbar {
+    position: fixed;
+    background-color: rgba(255, 200, 150, 0.7); // Laranja transparente (RGBA com alpha de 0.3)
+    width: 100%;
+    z-index: 10;
+    color: #FF7F27; // Laranja bem escuro (SaddleBrown, ou ajuste o tom se necessário)
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  
+    // Adicione estilos adicionais se necessário
+    a {
+        color: #A0522D; // Links também em laranja escuro
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+  
+        &:hover {
+            color: #FF4500; // Laranja mais vivo ao passar o mouse
+        }
+    }
+  
+    
+      &.hidden {
+        transform: translateY(-100%);
+      }
+    }
+    
+    .navbar-nav {
+      justify-content: right;
+      align-items: right; 
+      width: 100%; 
+    }
+    
+    .nav-link {
+      position: relative;
+      border-radius: 5px;
+      margin-right: 1rem;
+      color: black;
+      text-transform: uppercase; /* Transforma o texto em maiúsculas */
+      font-weight: bold; /* Adiciona ênfase ao texto */
+  
+      overflow: hidden; /* Garante que efeitos externos não vazem */
+      cursor: pointer;
+    
+      &:hover {
+        color: white;
+      }
+    }
+      
+    .navbar-collapse {
+      @media (max-width: 800px) {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+      }
+    }
+    .navbar-toggler {
+      @media (max-width: 800px) {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 0.5rem 1rem;
+    
+        &:hover {
+          background: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
