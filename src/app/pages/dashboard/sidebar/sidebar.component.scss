@@ -1,0 +1,61 @@
+/* Estilos gerais do sidebar */
+.sidebar {
+  background-color: #1f1f1f;
+  color: #fff;
+  width: 220px;
+  height: 100vh;
+  padding-top: 1rem;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar li:hover {
+  background-color: #343a40;
+}
+
+.sidebar .toggle-icon {
+  font-size: 0.9rem;
+}
+
+.sidebar i {
+  margin-right: 0.5rem;
+}
+
+.sub-menu,
+.sub-menu-navigate {
+  display: none; /* Escondido por padrão */
+  background-color: #343a40;
+  padding-left: 1rem;
+}
+
+.sub-menu li,
+.sub-menu-navigate li {
+  padding: 0.5rem 1rem;
+}
+
+.sub-menu li:hover,
+.sub-menu-navigate li:hover {
+  background-color: #495057;
+}
+
+/* Item ativo */
+.sidebar .active {
+  background-color: #0d6efd;
+  color: #fff;
+}
