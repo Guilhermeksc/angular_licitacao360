@@ -1,14 +1,23 @@
 import { Component } from '@angular/core';
 import { MinisidebarComponent } from './minisidebar/minisidebar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { ContentComponent } from './content/content.component';
-
+import { ControleContratosComponent } from '../../pages/dashboard/content/controle-contratos/controle-contratos.component';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-dashboard',
-  imports: [MinisidebarComponent, SidebarComponent, ContentComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
+  imports: [
+    CommonModule,
+    MinisidebarComponent,
+    SidebarComponent,
+    ControleContratosComponent,
+  ],
 })
 export class DashboardComponent {
+  activeSection: string = 'prazos';
 
+  setSection(section: string) {
+    this.activeSection = section;
+  }
 }

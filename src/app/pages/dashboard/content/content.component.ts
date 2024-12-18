@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ControleContratosComponent } from './controle-contratos/controle-contratos.component';
 
 @Component({
   selector: 'app-content',
-  imports: [],
   templateUrl: './content.component.html',
-  styleUrl: './content.component.scss'
+  styleUrls: ['./content.component.scss'],
+  imports: [CommonModule , FormsModule, ControleContratosComponent],
+  standalone: true, // Standalone ou parte de um módulo
 })
 export class ContentComponent {
-
+  activeSection: string = 'prazos';
 }
