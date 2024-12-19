@@ -3,6 +3,7 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
+import { provideHttpClient } from '@angular/common/http'; // Certifique-se de importar isso
 
 // Inicialização do vídeo após o DOM ser carregado
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Inicialização do Angular
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes) // Passa as rotas configuradas
-  ]
+    provideRouter(routes), // Passa as rotas configuradas
+    provideHttpClient(), // Adicione esta linha para registrar o HttpClient
+  ],
 }).catch(err => console.error(err));

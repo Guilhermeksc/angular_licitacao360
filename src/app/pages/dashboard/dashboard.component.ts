@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { MinisidebarComponent } from './minisidebar/minisidebar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { ControleContratosComponent } from '../../pages/dashboard/content/controle-contratos/controle-contratos.component';
-import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+  styleUrls: ['./dashboard.component.scss'],
+  standalone: true,
   imports: [
+    RouterOutlet,
     CommonModule,
     MinisidebarComponent,
     SidebarComponent,
-    ControleContratosComponent,
   ],
 })
 export class DashboardComponent {

@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../../../core/services/api.service';
-
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
-  selector: 'app-controle-contratos',
+  selector: 'app-prazos',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
-  templateUrl: './controle-contratos.component.html',
-  styleUrls: ['./controle-contratos.component.scss'],
+  imports: [CommonModule, FormsModule], // Inclua aqui
+  templateUrl: './prazos.component.html',
+  styleUrls: ['./prazos.component.scss'],
 })
-export class ControleContratosComponent {
+export class PrazosComponent {
   uasg: string = '';
   tabelaSelecionada: string = '';
   tabelasDisponiveis: string[] = [];
@@ -24,9 +22,10 @@ export class ControleContratosComponent {
     if (this.uasg) {
       this.apiService.consultarUASG(this.uasg).subscribe(
         (response) => {
-          this.resultado = response;
           if (response.success) {
-            alert(`Sucesso: ${response.message}`);
+            this.resultado = response;
+            alert(response.message);
+            this.atualizarTabelasDisponiveis();
           } else {
             alert(`Erro: ${response.message}`);
           }
@@ -55,5 +54,35 @@ export class ControleContratosComponent {
         }
       );
     }
+  }
+
+  limparTabelas() {
+    this.apiService.limparTabelas().subscribe(
+      (response) => {
+        if (response.success) {
+          alert(response.message);
+          this.atualizarTabelasDisponiveis();
+        } else {
+          alert(`Erro: ${response.message}`);
+        }
+      },
+      (error) => {
+        console.error('Erro ao limpar tabelas:', error);
+        alert('Erro ao limpar tabelas.');
+      }
+    );
+  }
+
+  atualizarTabelasDisponiveis() {
+    this.apiService.visualizarTabela('').subscribe(
+      (response) => {
+        if (response.success) {
+          this.tabelasDisponiveis = response.data;
+        }
+      },
+      (error) => {
+        console.error('Erro ao atualizar tabelas disponíveis:', error);
+      }
+    );
   }
 }
