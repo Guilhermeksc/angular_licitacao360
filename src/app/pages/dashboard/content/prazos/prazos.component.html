@@ -1,44 +1,36 @@
 <div class="controle-prazos">
-    <h1>Consulta de Contratos - ComprasNet</h1>
-  
-    <!-- Formulário para consulta de UASG -->
-    <form (ngSubmit)="consultarUASG()">
-      <label for="uasg">Digite o código UASG:</label>
-      <input type="text" id="uasg" [(ngModel)]="uasg" name="uasg" required />
-      <button type="submit">Consultar</button>
-    </form>
-  
-    <div style="margin-top: 20px;">
-      <button (click)="resultado = null" style="color: white; background-color: red; padding: 10px; border: none; cursor: pointer;">
-        Limpar Tabelas de Consulta
-      </button>
-    </div>
-  
-    <!-- Dropdown para selecionar tabelas -->
-    <div style="margin-top: 20px;">
-      <label for="tabelas">Selecione uma tabela já pesquisada:</label>
-      <select [(ngModel)]="tabelaSelecionada" name="tabelas">
-        <option value="">-- Selecione --</option>
-        <option *ngFor="let tabela of tabelasDisponiveis" [value]="tabela">{{ tabela }}</option>
-      </select>
-      <button (click)="visualizarDadosTabela()">Visualizar Dados</button>
-    </div>
-  
-    <!-- Área para exibir resultados -->
-    <div id="resultado" style="margin-top: 20px;" *ngIf="resultado">
-      <p *ngIf="!resultado.data">Nenhum dado encontrado.</p>
-      <table *ngIf="resultado.data && resultado.columns">
-        <thead>
-          <tr>
-            <th *ngFor="let col of resultado.columns">{{ col }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let row of resultado.data">
-            <td *ngFor="let value of row">{{ value }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <h1>Consulta de Contratos - ComprasNet</h1>
+
+  <!-- Formulário para consulta de UASG -->
+  <form (ngSubmit)="consultarUASG()">
+    <label for="uasg">Digite o código UASG:</label>
+    <input type="text" id="uasg" [(ngModel)]="uasg" name="uasg" required />
+    <button type="submit">Consultar</button>
+  </form>
+
+  <!-- Dropdown para selecionar tabelas -->
+  <div style="margin-top: 20px;">
+    <label for="tabelas">Selecione uma tabela já pesquisada:</label>
+    <select [(ngModel)]="tabelaSelecionada" name="tabelas">
+      <option value="">-- Selecione --</option>
+      <option *ngFor="let tabela of tabelasDisponiveis" [value]="tabela">{{ tabela }}</option>
+    </select>
+    <button (click)="visualizarDadosTabela()">Visualizar Dados</button>
   </div>
-  
+
+  <!-- Área para exibir resultados -->
+  <div *ngIf="resultado && colunas.length > 0" style="margin-top: 20px;">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let coluna of colunas">{{ coluna }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let linha of resultado">
+          <td *ngFor="let celula of linha">{{ celula }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

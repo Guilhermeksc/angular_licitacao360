@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root', // Garante que o serviço esteja disponível globalmente
+  providedIn: 'root',
 })
 export class ApiService {
   private baseUrl = 'http://localhost:8000/api/';
 
-  constructor(private http: HttpClient) {} // Certifique-se de que `HttpClient` está sendo injetado corretamente
+  constructor(private http: HttpClient) {}
 
   consultarUASG(uasg: string): Observable<any> {
     return this.http.post(`${this.baseUrl}consulta_api/`, { uasg });
@@ -20,5 +20,9 @@ export class ApiService {
 
   limparTabelas(): Observable<any> {
     return this.http.post(`${this.baseUrl}limpar_tabelas/`, {});
+  }
+
+  getTables(): Observable<any> {
+    return this.http.get(`${this.baseUrl}consulta_api/`);
   }
 }
