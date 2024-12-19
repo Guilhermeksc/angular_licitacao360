@@ -4,33 +4,73 @@
   <!-- Formulário para consulta de UASG -->
   <form (ngSubmit)="consultarUASG()">
     <label for="uasg">Digite o código UASG:</label>
-    <input type="text" id="uasg" [(ngModel)]="uasg" name="uasg" required />
-    <button type="submit">Consultar</button>
+    <input 
+      type="text" 
+      id="uasg" 
+      [(ngModel)]="uasg" 
+      name="uasg" 
+      required 
+      placeholder="Exemplo: 123456" 
+      aria-label="Digite o código UASG" 
+    />
+    <button type="submit" aria-label="Consultar UASG">Consultar</button>
   </form>
 
-  <!-- Dropdown para selecionar tabelas -->
+  <!-- Dropdown para seleção de tabelas -->
   <div style="margin-top: 20px;">
     <label for="tabelas">Selecione uma tabela já pesquisada:</label>
-    <select [(ngModel)]="tabelaSelecionada" name="tabelas">
+    <select 
+      id="tabelas" 
+      [(ngModel)]="tabelaSelecionada" 
+      name="tabelas" 
+      aria-label="Selecione uma tabela"
+    >
       <option value="">-- Selecione --</option>
-      <option *ngFor="let tabela of tabelasDisponiveis" [value]="tabela">{{ tabela }}</option>
+      <option *ngFor="let tabela of tabelasDisponiveis" [value]="tabela">
+        {{ tabela }}
+      </option>
     </select>
-    <button (click)="visualizarDadosTabela()">Visualizar Dados</button>
+    <button (click)="visualizarDadosTabela()" aria-label="Visualizar Dados da Tabela Selecionada">
+      Visualizar Dados
+    </button>
   </div>
 
-  <!-- Área para exibir resultados -->
-  <div *ngIf="resultado && colunas.length > 0" style="margin-top: 20px;">
+  <!-- Campo de busca e tabela de resultados -->
+  <div *ngIf="dadosFiltrados.length > 0" style="margin-top: 20px;">
+    <label for="filtro">Filtrar dados da tabela:</label>
+    <input 
+      type="text" 
+      id="filtro" 
+      [(ngModel)]="filtro" 
+      (input)="aplicarFiltro()" 
+      placeholder="Digite para filtrar..." 
+      aria-label="Filtro da Tabela"
+    />
     <table>
       <thead>
         <tr>
-          <th *ngFor="let coluna of colunas">{{ coluna }}</th>
+          <th>Número</th>
+          <th>Tipo</th>
+          <th>Processo</th>
+          <th>Valor Global</th>
+          <th>Fornecedor</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let linha of resultado">
-          <td *ngFor="let celula of linha">{{ celula }}</td>
+        <tr 
+          *ngFor="let linha of dadosFiltrados" 
+          (dblclick)="abrirDetalhes(linha)" 
+          tabindex="0" 
+          aria-label="Clique duplo para abrir os detalhes da linha"
+        >
+          <td>{{ linha.numero }}</td>
+          <td>{{ linha.tipo }}</td>
+          <td>{{ linha.processo }}</td>
+          <td>{{ linha.valor_global | currency:'BRL' }}</td>
+          <td>{{ linha.fornecedor_nome }}</td>
         </tr>
       </tbody>
     </table>
   </div>
+  
 </div>
